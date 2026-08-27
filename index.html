@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="진주와 부산의 최신 날씨 관측 정보" />
+    <title>오늘의 남쪽 날씨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="sky-orb sky-orb--one"></div>
+    <div class="sky-orb sky-orb--two"></div>
+    <main class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">JINJU · BUSAN</p>
+          <h1>오늘의<br /><span>남쪽 날씨</span></h1>
+          <p class="intro">두 도시의 하늘을 가장 최근 관측 데이터로 전해드려요.</p>
+        </div>
+        <div class="hero-meta">
+          <div class="date-block">
+            <span id="today-day" class="date-block__day">--</span>
+            <span id="today-date" class="date-block__date">불러오는 중</span>
+          </div>
+          <button id="refresh-button" class="refresh-button" type="button" aria-label="날씨 새로고침"><span aria-hidden="true">↻</span> 새로고침</button>
+        </div>
+      </header>
+      <section aria-labelledby="weather-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow eyebrow--dark">LATEST WEATHER</p><h2 id="weather-heading">지금, 두 도시</h2></div>
+          <p id="update-summary" class="update-summary" aria-live="polite">데이터를 불러오고 있어요.</p>
+        </div>
+        <div id="weather-grid" class="weather-grid" aria-live="polite">
+          <article class="weather-card weather-card--loading"><div class="skeleton"></div></article>
+          <article class="weather-card weather-card--loading"><div class="skeleton"></div></article>
+        </div>
+      </section>
+      <section class="history" aria-labelledby="history-heading">
+        <div class="section-heading section-heading--compact">
+          <div><p class="eyebrow eyebrow--dark">RECENT RECORDS</p><h2 id="history-heading">최근 두 번의 기록</h2></div>
+          <p class="history-note">각 도시의 마지막 2개 관측값</p>
+        </div>
+        <div id="history-grid" class="history-grid"></div>
+      </section>
+      <footer><span>Data from Open-Meteo</span><span>자동 수집된 CSV 기준</span></footer>
+    </main>
+    <template id="weather-card-template">
+      <article class="weather-card">
+        <div class="card-topline"><div><p class="card-label">CURRENT</p><h3 class="location"></h3></div><span class="weather-icon" aria-hidden="true"></span></div>
+        <div class="temperature-row"><strong class="temperature"></strong><div><p class="condition"></p><p class="observed-time"></p></div></div>
+        <div class="weather-details">
+          <div><span>체감</span><strong class="feels-like"></strong></div>
+          <div><span>습도</span><strong class="humidity"></strong></div>
+          <div><span>강수</span><strong class="precipitation"></strong></div>
+        </div>
+      </article>
+    </template>
+  </body>
+</html>
