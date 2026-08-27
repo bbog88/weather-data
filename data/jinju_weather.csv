@@ -1,0 +1,2 @@
+﻿collected_at,observed_at,location,latitude,longitude,temperature_c,apparent_temperature_c,relative_humidity_pct,precipitation_mm,weather_code
+2026-08-27T10:28:24+09:00,2026-08-27T10:15,진주,35.1800,128.1076,29.5,36.3,78,0.0,1

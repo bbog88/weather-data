@@ -1,0 +1,42 @@
+name: Collect weather data
+
+on:
+  schedule:
+    # GitHub cron uses UTC. Running at minute 17 avoids the busiest top-of-hour window.
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weather-data-collector
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TZ: Asia/Seoul
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Collect Jinju and Busan weather
+        run: python collect_weather.py
+
+      - name: Commit and push hourly result
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/jinju_weather.csv data/busan_weather.csv
+          git commit --allow-empty -m "data: collect weather $(date '+%Y-%m-%d %H:%M KST')"
+          git push
